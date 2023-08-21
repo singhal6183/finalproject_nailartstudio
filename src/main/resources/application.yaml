@@ -1,0 +1,15 @@
+spring:
+   datasource:
+      username: nailart_studio
+      password: nailart_studio@123
+      url: jdbc:mysql://localhost:3306/nailart_studio
+      
+   jpa:
+      hibernate:
+         ddl-auto: update
+      show-sql: true 
+      defer_datasource_initialization: true
+      
+   sql:
+      init:
+         mode: always
