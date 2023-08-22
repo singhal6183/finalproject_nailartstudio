@@ -24,7 +24,7 @@ public class EmployeeData {
 		employeeLastName = employee.getEmployeeLastName();
 		employeePhone = employee.getEmployeePhone();
 		employeeJobTitle = employee.getEmployeeJobTitle();
-	//	massageStudioId = therapist.getMassageStudioId(massageStudio);
+		//nailArtStudio = employee.getnailArtStudioId(nailArtStudio);
 		}
 	
 

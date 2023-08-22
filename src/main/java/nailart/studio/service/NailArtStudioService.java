@@ -74,34 +74,7 @@ public class NailArtStudioService {
         NailArtStudio.setNailArtStudioZip(NailArtStudioData.getNailArtStudioZip());
         NailArtStudio.setNailArtStudioPhone(NailArtStudioData.getNailArtStudioPhone());
 
-      /*  // Map customers from DTO to entity
-        if (NailArtStudioData.getCustomers() != null) {
-            Set<Customer> customers = new HashSet<>();
-            for (NailArtStudioData.NailArtStudioCustomer customerDTO : NailArtStudioData.getCustomers()) {
-                Customer customer = new Customer();
-                customer.setNailArtStudioCustomerId(customerDTO.getNailArtStudioCustomerId());
-                customer.setCustomerEmail(customerDTO.getCustomerEmail());
-                customers.add(customer);
-            }
-            NailArtStudio.setCustomers(customers);
-        } else {
-            NailArtStudio.setCustomers(new HashSet<>());
-        }*/
-
-        // Map employees from DTO to entity
-       /*if (NailArtStudioData.getEmployees() != null) {
-            Set<Employee> employees = new HashSet<>();
-            for (NailArtStudioData.NailArtStudioEmployee employeeDTO : NailArtStudioData.getEmployees()) {
-                Employee employee = new Employee();
-                employee.setId(employeeDTO.getId());
-                employee.setEmployeeName(employeeDTO.getEmployeeName());
-                employee.setNailArtStudio(NailArtStudio);
-                employees.add(employee);
-            }
-            NailArtStudio.setEmployees(employees);
-        } else {
-            NailArtStudio.setEmployees(new HashSet<>());
-        }*/
+    
     }
     // For Employee data
     @Transactional(readOnly = false)
@@ -134,14 +107,15 @@ public class NailArtStudioService {
 		 
 		 if(employee.getNailArtStudio().getNailArtStudioId() != NailArtStudioId) {
 			 throw new IllegalArgumentException("The employee with ID=" + employeeId 
-					 + " is not employed by the pet store with ID=" + NailArtStudioId + ".");
+					 + " is not employed by the nailart studio with ID=" + NailArtStudioId + ".");
 		 }
 		 return employee;
 	}
 	
 	private void copyEmployeeFields(Employee employee, NailArtStudioEmployee nailArtStudioEmployee) {
-		employee.setEmployeeFirstName(nailArtStudioEmployee.getEmployeeFirstName());
+		
 		employee.setEmployeeId(nailArtStudioEmployee.getEmployeeId());
+		employee.setEmployeeFirstName(nailArtStudioEmployee.getEmployeeFirstName());
 		employee.setEmployeeJobTitle(nailArtStudioEmployee.getEmployeeJobTitle());
 		employee.setEmployeeLastName(nailArtStudioEmployee.getEmployeeLastName());
 		employee.setEmployeePhone(nailArtStudioEmployee.getEmployeePhone());

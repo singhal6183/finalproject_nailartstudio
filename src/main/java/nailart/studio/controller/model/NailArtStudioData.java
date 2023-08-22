@@ -59,6 +59,7 @@ public class NailArtStudioData {
 			employeeLastName = employee.getEmployeeLastName();
 			employeePhone = employee.getEmployeePhone();
 			employeeJobTitle = employee.getEmployeeJobTitle();
+			
 		}
 	}
 	

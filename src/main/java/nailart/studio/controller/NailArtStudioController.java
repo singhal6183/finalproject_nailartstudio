@@ -39,9 +39,9 @@ public class NailArtStudioController {
 	@Autowired
 	private CustomerService customerService;
    
- /* For NailArt Studio */
-	
-    @PostMapping    //•	Create new NailArtStudio (POST on Nail Art Studio)
+
+    //	Create new NailArtStudio (POST on Nail Art Studio)
+    @PostMapping    
     @ResponseStatus(code = HttpStatus.CREATED)
     public NailArtStudioData createNailArtStudio(@RequestBody NailArtStudioData nailArtStudioData) {
         
@@ -49,7 +49,8 @@ public class NailArtStudioController {
         return nailArtStudioService.saveNailArtStudio(nailArtStudioData);
     }
     
-    @GetMapping    //•	Browse all NailArtStudios (GET on Studios) – without listing all customers and employees.
+      //	Browse all NailArtStudios (GET on Studios) – without listing all customers and employees.
+    @GetMapping    
 	public List<NailArtStudioData> getAllNailArtStudio() {
 		
 		log.info("Retrieving all NailArt Studio");
@@ -57,7 +58,8 @@ public class NailArtStudioController {
 	    return nailArtStudios;
 	}
     
-    @GetMapping("{id}") //•	Browse specific NailArtStudios (GET on Studio specified) – with listing all customers and employees.
+     //	Browse specific NailArtStudios (GET on Studio specified) – with listing all customers and employees.
+    @GetMapping("{id}") 
 	public NailArtStudioData getNailArtStudioById(@PathVariable Long id) {
 		
 		log.info("Retrieving NailArt Studio with ID= {}", id);
@@ -66,23 +68,33 @@ public class NailArtStudioController {
 	    return nailArtStudio;
 	}
 	
-
-    @PutMapping("{id}") //•	Update NailArtStudio (PUT on a specific MassageStudio)
+     //	Update information for a specific NailArtStudio (PUT on a specific MassageStudio)
+    @PutMapping("{id}") 
     public NailArtStudioData updateNailArtStudio(@PathVariable Long id, @RequestBody NailArtStudioData nailArtStudioData) {
     	nailArtStudioData.setNailArtStudioId(id);
     	log.info("Updating NailArt Studio with ID {}", id, nailArtStudioData);
         return nailArtStudioService.updateNailArtStudio(id, nailArtStudioData);
     }
     
-   
-    @PostMapping("{id}/employee") //•	Add new Employee to a NailArtStudio (POST on Employee with NailArtStudio specified) 
+    //	Delete a specific NailArtStudio (DELETE) – deletes all associated employees, without deleting all customers
+	@DeleteMapping("{id}") 
+	public Map<String, String> deleteNailArtStudioById(@PathVariable Long id) {
+		log.info("Deleting pet store with ID={}", id);
+		
+	    nailArtStudioService.deleteNailArtStudioById(id);
+	    return Map.of("message", "Deletion of Nail Art Studio with ID=" + id + " was successful.");
+	}
+    
+    //	Add new Employee to a specific NailArtStudio (POST on Employee with NailArtStudio specified) 
+    @PostMapping("{id}/employee") 
     @ResponseStatus(code = HttpStatus.CREATED)
     public NailArtStudioEmployee addEmployeeToNailArtStudio(@PathVariable Long id, @RequestBody NailArtStudioEmployee nailArtStudioEmployee) {
     	log.info("Adding new employee to NailArt Studio with ID=" + id, nailArtStudioEmployee);
         return nailArtStudioService.saveEmployee(id, nailArtStudioEmployee);
     }
-
-    @PostMapping("{id}/customer") //•	Add new Customer to a NailArtStudio (POST on Customer with NailArtStudio specified)
+    
+   //	Add new Customer to a specific NailArtStudio (POST on Customer with NailArtStudio specified)
+    @PostMapping("{id}/customer") 
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public NailArtStudioCustomer addCustomerToNailArtStudio(@PathVariable Long id, @RequestBody NailArtStudioCustomer nailArtStudioCustomer) {
 		log.info("Adding new customer to NailArt Studio with ID=" + id, nailArtStudioCustomer, id);
@@ -90,34 +102,28 @@ public class NailArtStudioController {
 	}
     
    	
-	@DeleteMapping("{id}")
-	public Map<String, String> deleteNailArtStudioById(@PathVariable Long id) {
-		log.info("Deleting pet store with ID={}", id);
-		
-	    nailArtStudioService.deleteNailArtStudioById(id);
-	    return Map.of("message", "Deletion of Nail Art Studio with ID=" + id + " was successful.");
-	}
-	
-    @GetMapping("/employee")  //•	GET all Employees
+   //	Retrieve all employees
+    @GetMapping("/employee")  
 	public List<EmployeeData> retrieveAllEmployees(){
 		log.info("Retrieve all employees.");
 		return employeeService.retrieveAllEmployees();
 	}
     
-    @GetMapping("/customer")   //•	GET all Customers
+   // Retrieve all Customers
+    @GetMapping("/customer")   
 	public List<CustomerData> retrieveAllCustomers(){
 		log.info("Retrieve all customers.");
 		return customerService.retrieveAllCustomers();
 	}
     
-  //retrieve all employee associated with specific NailArtStudioId 
+  // Retrieve all employee associated with specific NailArtStudioId 
   	@GetMapping("{id}/employee")
   	public Set<NailArtStudioEmployee> retrieveEmployeesbyNailArtStudioId(@PathVariable long id){
   		log.info("Retrieve all employees at NailArt Studio with ID=" + id);
   		return nailArtStudioService.retrieveNailArtStudioById(id).getEmployees();
   	}
   	
-  	//retrieve all customers associated with specific NailArtStudioId 
+  	// Retrieve all customers associated with specific NailArtStudioId 
   	@GetMapping("{id}/customer")
   	public Set<NailArtStudioCustomer> retrieveCustomersbyNailArtStudioId(@PathVariable long id){
   		log.info("Retrieve all customers at NailArt Studio with ID=" + id);
