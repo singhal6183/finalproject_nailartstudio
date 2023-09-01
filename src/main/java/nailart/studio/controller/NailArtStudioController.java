@@ -20,6 +20,7 @@ import nailart.studio.controller.model.NailArtStudioData.NailArtStudioEmployee;
 import nailart.studio.service.NailArtStudioService;
 import nailart.studio.service.CustomerService;
 import nailart.studio.service.EmployeeService;
+import nailart.studio.entity.Customer;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -129,5 +130,15 @@ public class NailArtStudioController {
   		log.info("Retrieve all customers at NailArt Studio with ID=" + id);
   		return nailArtStudioService.retrieveNailArtStudioById(id).getCustomers();
   	}
+  	
+ // Retrieve a customers associated with specific CustomerId 
+  	@GetMapping("/customer/{customerId}")
+  	public CustomerData getCustomerById(@PathVariable long customerId){
+  		log.info("Retrieve a customer with customer ID=" + customerId);
+  		return nailArtStudioService.getCustomerById(customerId);
+  	}
 
+	
+  	
+  	
 }

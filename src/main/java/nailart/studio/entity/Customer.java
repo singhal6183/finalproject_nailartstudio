@@ -23,7 +23,7 @@ public class Customer {
 	private String customerFirstName;
 	private String customerLastName;
 	
-	@Column(unique = true)
+	//@Column(unique = true)
 	private String customerEmail;
 	
 	@EqualsAndHashCode.Exclude

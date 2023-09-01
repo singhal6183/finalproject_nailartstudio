@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import nailart.studio.controller.model.NailArtStudioData;
 import nailart.studio.controller.model.NailArtStudioData.NailArtStudioCustomer;
 import nailart.studio.controller.model.NailArtStudioData.NailArtStudioEmployee;
+import nailart.studio.controller.model.CustomerData;
 import nailart.studio.dao.NailArtStudioDao;
 import nailart.studio.dao.CustomerDao;
 import nailart.studio.dao.EmployeeDao;
@@ -146,7 +147,7 @@ public class NailArtStudioService {
 	}
 
 
-	private Customer findCustomerById(Long NailArtStudioId, Long customerId) {
+	public Customer findCustomerById(Long NailArtStudioId, Long customerId) {
 		 Customer customer = customerDao.findById(customerId).orElseThrow(
 				 () -> new NoSuchElementException(
 				 "Customer with ID=" + customerId + " was not found."));
@@ -165,6 +166,21 @@ public class NailArtStudioService {
 		 }
 		 return customer;
 	}
+	//
+	public CustomerData getCustomerById(Long customerId) {
+		 Customer customer = customerDao.findById(customerId).orElseThrow(
+				 () -> new NoSuchElementException(
+				 "Customer with ID=" + customerId + " was not found."));
+		 
+			 if(customer.getCustomerId() != customerId) {
+				 throw new IllegalArgumentException("The employee with ID=" + customerId 
+						 + " is not employed by the nailart studio with ID=");
+			 }
+		 
+		
+		 return new CustomerData(customer);
+	}
+	//
 	
 	private void copyCustomerFields(Customer customer, NailArtStudioCustomer NailArtStudioCustomer) {
 		customer.setCustomerFirstName(NailArtStudioCustomer.getCustomerFirstName());
