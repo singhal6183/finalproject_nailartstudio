@@ -1,3 +1,5 @@
+GitHUb Link:    https://github.com/singhal6183/nailart_studio
+YouTube Link: https://youtu.be/OEG3_zxhFVE
 
 Title:            Nail Art Studio
 Executive Summary:
